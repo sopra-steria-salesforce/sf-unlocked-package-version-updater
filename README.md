@@ -13,6 +13,6 @@ This action provides one output:
 ```yml
 # Update sfdx-project.json version number (e.g., 0.9.0.NEXT to 0.10.0.NEXT)
 - name: 'Extract package:version:create result data'
-  id: packaging-updater
+  id: version-updater
   uses: navikt/github-action-sfdx-version-updater
 ```
