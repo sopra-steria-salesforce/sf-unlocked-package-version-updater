@@ -1,6 +1,6 @@
-# sfdx-packaging-updater
+# sfdx-version-updater
 
-This Github Action is a helper action to extract revmoe not needed package versions from the `sfdx-project.json` file. It also updates any references in the README to the latest available package version.
+This Github Action is a helper action to update the version number in `sfdx-project.json`. Forked from [muenzpraeger/github-action-sfdx-packaging-updater](https://github.com/muenzpraeger/github-action-sfdx-packaging-updater). All credits goes to muenzpraeger. Only minor modifications are made in this repo.
 
 ## Outputs
 
@@ -11,8 +11,8 @@ This action provides one output:
 ## Example
 
 ```yml
-# Update sfdx-project.json and README to use only latest package version
+# Update sfdx-project.json version number (e.g., 0.9.0.NEXT to 0.10.0.NEXT)
 - name: 'Extract package:version:create result data'
   id: packaging-updater
-  uses: muenzpraeger/github-action-sfdx-packaging-updater
+  uses: navikt/github-action-sfdx-version-updater
 ```
