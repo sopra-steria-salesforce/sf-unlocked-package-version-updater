@@ -1,18 +1,32 @@
-# sfdx-version-updater
+# sf-unlocked-package-version-updater
 
-This Github Action is a helper action to update the version number in `sfdx-project.json`. Forked from [muenzpraeger/github-action-sfdx-packaging-updater](https://github.com/muenzpraeger/github-action-sfdx-packaging-updater). All credits goes to muenzpraeger. Only minor modifications are made in this repo.
-
-## Outputs
-
-This action provides one output:
-
--   `isSuccess` - true if the result status code equals 0.
+This Github Action is a helper action to update the version number in `sfdx-project.json`. Forked from [navikt/github-action-sfdx-version-updater](https://github.com/navikt/github-action-sfdx-version-updater/tree/master).
 
 ## Example
 
 ```yml
-# Update sfdx-project.json version number (e.g., 0.9.0.NEXT to 0.10.0.NEXT)
-- name: 'Extract package:version:create result data'
-  id: version-updater
-  uses: navikt/github-action-sfdx-version-updater
+name: 'Deploy'
+on:
+  push:
+    branches:
+      - master
+      - main
+jobs:
+ promote:
+    name: Promote
+    steps:
+      - run: echo 'promoting'
+
+  deploy:
+    name: Deploy
+    needs: promote
+    steps:
+      - run: echo 'Deploying'
+
+  update-version-number:
+    name: Update Version Number
+    needs: promote
+    steps:
+      - uses: actions/checkout@v4
+      - uses: sopra-steria-salesforce/sf-unlocked-package-version-updater@v1
 ```
