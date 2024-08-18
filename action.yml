@@ -1,10 +1,6 @@
 name: Update version number
 description: Updates version number in sfdx-project.json
-author: navikt
-outputs:
-    isSuccess:
-        description: Response status if everything went ok.
-
+author: sopra-steria-salesforce
 runs:
-    using: 'node12'
+    using: 'node20'
     main: 'index.js'
