@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as core from '@actions/core'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -20,7 +21,6 @@ export async function run(): Promise<void> {
     const sfdxJson: SfdxProjectJson = JSON.parse(
       fs.readFileSync(sfdxJsonPath, 'utf8')
     )
-
     // We need all package directories
     const packageDirectories = sfdxJson.packageDirectories
 
@@ -49,5 +49,3 @@ export async function run(): Promise<void> {
     core.setFailed(error.message)
   }
 }
-
-run()
