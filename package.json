@@ -1,6 +1,5 @@
 {
   "name": "sf-unlocked-package-version-updater",
-  "description": "Setup sf cli in GitHub Actions",
   "version": "2.0.1",
   "type": "module",
   "author": "sopra-steria-salesforce",
