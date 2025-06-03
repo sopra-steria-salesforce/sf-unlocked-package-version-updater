@@ -30,5 +30,5 @@ jobs:
     needs: promote
     steps:
       - uses: actions/checkout@v4
-      - uses: sopra-steria-salesforce/sf-unlocked-package-version-updater@v1
+      - uses: sopra-steria-salesforce/sf-unlocked-package-version-updater@v2
 ```
