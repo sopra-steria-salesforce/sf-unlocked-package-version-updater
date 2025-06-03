@@ -2,5 +2,5 @@ name: Update version number
 description: Updates version number in sfdx-project.json
 author: sopra-steria-salesforce
 runs:
-    using: 'node20'
-    main: 'index.js'
+  using: 'node20'
+  main: 'index.js'
