@@ -45,7 +45,6 @@ jobs:
             version=$(jq -r --arg dir "$dir" '.packageDirectories[] | select(.path == $dir) | .versionNumber' sfdx-project.json)
             echo "Package directory: $dir, Version number: $version"
           done
-
       - name: Test Local Action
         id: test-action
         uses: ./
@@ -55,3 +54,11 @@ jobs:
             version=$(jq -r --arg dir "$dir" '.packageDirectories[] | select(.path == $dir) | .versionNumber' sfdx-project.json)
             echo "Package directory: $dir, Version number: $version"
           done
+      - run:
+          echo "version=$(jq -r '.packageDirectories[].versionNumber'
+          sfdx-project.json)" > $GITHUB_OUTPUT
+        id: check
+
+      - name: Verify Version Number
+        if: steps.check.outputs.version != '0.2.0.NEXT'
+        run: exit 1
