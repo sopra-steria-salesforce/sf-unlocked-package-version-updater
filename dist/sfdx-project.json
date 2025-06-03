@@ -4,8 +4,9 @@
       "path": "force-app",
       "default": true,
       "package": "sf-package-version-updater",
-      "versionNumber": "0.4.0.NEXT"
-    }
+      "versionNumber": "0.1.0.NEXT"
+    },
+    { "path": "packages/logging" }
   ],
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
