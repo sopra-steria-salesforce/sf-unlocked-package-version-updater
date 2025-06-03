@@ -38,11 +38,20 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
+
+      - name: Print Output (Before)
+        run: |
+          for dir in $(jq -r '.packageDirectories[].path' sfdx-project.json); do
+            version=$(jq -r --arg dir "$dir" '.packageDirectories[] | select(.path == $dir) | .versionNumber' sfdx-project.json)
+            echo "Package directory: $dir, Version number: $version"
+          done
+
       - name: Test Local Action
         id: test-action
         uses: ./
-        with:
-          sf-cli-version: 2.34.7
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+      - name: Print Output (After)
+        run: |
+          for dir in $(jq -r '.packageDirectories[].path' sfdx-project.json); do
+            version=$(jq -r --arg dir "$dir" '.packageDirectories[] | select(.path == $dir) | .versionNumber' sfdx-project.json)
+            echo "Package directory: $dir, Version number: $version"
+          done
