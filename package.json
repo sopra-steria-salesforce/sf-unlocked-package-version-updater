@@ -1,7 +1,7 @@
 {
   "name": "sf-package-version-updater",
   "description": "Setup sf cli in GitHub Actions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "author": "sopra-steria-salesforce",
   "repository": {
