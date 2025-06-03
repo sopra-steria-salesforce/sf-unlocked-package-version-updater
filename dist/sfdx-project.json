@@ -3,7 +3,7 @@
     {
       "path": "force-app",
       "default": true,
-      "package": "sf-package-version-updater",
+      "package": "sf-unlocked-package-version-updater",
       "versionNumber": "0.1.0.NEXT"
     },
     { "path": "packages/logging" }

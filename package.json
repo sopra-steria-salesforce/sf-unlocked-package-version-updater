@@ -1,12 +1,12 @@
 {
-  "name": "sf-package-version-updater",
+  "name": "sf-unlocked-package-version-updater",
   "description": "Setup sf cli in GitHub Actions",
   "version": "0.1.1",
   "type": "module",
   "author": "sopra-steria-salesforce",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sopra-steria-salesforce/sf-package-version-updater.git"
+    "url": "git+https://github.com/sopra-steria-salesforce/sf-unlocked-package-version-updater.git"
   },
   "keywords": [
     "actions",

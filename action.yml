@@ -1,4 +1,4 @@
-name: Update version number
+name: sf-unlocked-package-version-updater
 description: Updates version number in sfdx-project.json
 author: sopra-steria-salesforce
 runs:

@@ -25,7 +25,7 @@ jobs:
     steps:
       - run: echo 'Deploying'
 
-  update-version-number:
+  sf-unlocked-package-version-updater:
     name: Update Version Number
     needs: promote
     steps:
