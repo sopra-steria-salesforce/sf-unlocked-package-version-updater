@@ -54,9 +54,8 @@ jobs:
             version=$(jq -r --arg dir "$dir" '.packageDirectories[] | select(.path == $dir) | .versionNumber' sfdx-project.json)
             echo "Package directory: $dir, Version number: $version"
           done
-      - run:
-          echo "version=$(jq -r '.packageDirectories[].versionNumber'
-          sfdx-project.json)" > $GITHUB_OUTPUT
+      - run: |
+          echo "version=$(jq -r '.packageDirectories[1].versionNumber' sfdx-project.json)" >> $GITHUB_OUTPUT
         id: check
 
       - name: Verify Version Number
