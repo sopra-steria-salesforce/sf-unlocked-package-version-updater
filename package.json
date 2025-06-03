@@ -1,38 +1,57 @@
 {
-    "name": "sfdx-packaging-results",
-    "version": "1.0.0",
-    "description": "Removes not needed package versions from sfdx-project.json and updates references in the README.",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js",
-        "prettier": "prettier --write '**/*.{js,json,md,yaml,yml}'"
-    },
-    "keywords": [
-        "github",
-        "actions"
-    ],
-    "author": "muenzpraeger",
-    "license": "CC0-1.0",
-    "repository": "sopra-steria-salesforce/sf-unlocked-package-version-updater",
-    "dependencies": {
-        "@actions/core": "^1.10.1"
-    },
-    "devDependencies": {
-        "eslint": "^5.16.0",
-        "husky": "^3.0.9",
-        "prettier": "^1.19.1"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "**/*.{js,json,md,yaml,yml}": [
-            "prettier --write"
-        ],
-        "*": [
-            "git add"
-        ]
-    }
+  "name": "sf-package-version-updater",
+  "description": "Setup sf cli in GitHub Actions",
+  "version": "0.1.0",
+  "type": "module",
+  "author": "sopra-steria-salesforce",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sopra-steria-salesforce/sf-package-version-updater.git"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup",
+    "salesforce",
+    "sfdx"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "preinstall": "cp scripts/pre-commit .git/hooks/ && chmod +x .git/hooks/pre-commit && echo 'hook copied'",
+    "bundle": "npm run format:write && npm run package",
+    "coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
+    "format:write": "npx prettier --write .",
+    "format:check": "npx prettier --check .",
+    "lint": "npx eslint .",
+    "local-action": "npx @github/local-action . src/main.ts .env",
+    "local-action:post": "npx @github/local-action . src/cache/save.ts .env",
+    "package": "ncc build src/main.ts --license licenses.txt --minify && ncc build src/cache/save.ts --out dist/cache-save --minify",
+    "all": "npm run format:write && npm run lint && npm run coverage && npm run package"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.2.9",
+    "@github/local-action": "^3.2.1",
+    "@types/node": "^20.17.32",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.26.0",
+    "@vercel/ncc": "^0.38.3",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-import-resolver-typescript": "^4.3.4",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.4.0",
+    "make-coverage-badge": "^1.2.0",
+    "prettier": "^3.5.3",
+    "prettier-eslint": "^16.4.1",
+    "typescript": "^5.8.3"
+  }
 }
