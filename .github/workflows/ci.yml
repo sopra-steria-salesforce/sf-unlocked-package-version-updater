@@ -13,32 +13,21 @@ jobs:
     name: TypeScript Tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        id: setup-node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
           cache: npm
-      - name: Install Dependencies
-        id: npm-ci
-        run: npm ci
-      - name: Check Format
-        id: npm-format-check
-        run: npm run format:check
-      - name: Lint
-        id: npm-lint
-        run: npm run lint
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
   test-action:
     name: GitHub Actions Test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - run: |
+          echo "VERSION_BEFORE=$(jq -r '.packageDirectories[0].versionNumber' sfdx-project.json)" >> $GITHUB_ENV
       - name: Print Output (Before)
         run: |
           for dir in $(jq -r '.packageDirectories[].path' sfdx-project.json); do
@@ -46,7 +35,6 @@ jobs:
             echo "Package directory: $dir, Version number: $version"
           done
       - name: Test Local Action
-        id: test-action
         uses: ./
       - name: Print Output (After)
         run: |
@@ -55,9 +43,14 @@ jobs:
             echo "Package directory: $dir, Version number: $version"
           done
       - run: |
-          echo "version=$(jq -r '.packageDirectories[0].versionNumber' sfdx-project.json)" >> $GITHUB_OUTPUT
-        id: check
+          echo "VERSION_AFTER=$(jq -r '.packageDirectories[0].versionNumber' sfdx-project.json)" >> $GITHUB_ENV
 
       - name: Verify Version Number
-        if: steps.check.outputs.version != '0.2.0.NEXT'
-        run: exit 1
+        run: |
+          if [ "${{ env.VERSION_BEFORE }}" = "${{ env.VERSION_AFTER }}" ]; then
+            echo "::error::Version was not changed (${{ env.VERSION_BEFORE }})"
+            exit 1
+          else
+            echo "Version was changed. Before: '${{ env.VERSION_BEFORE }}'. After: '${{ env.VERSION_AFTER }}'"
+            exit 0
+          fi
