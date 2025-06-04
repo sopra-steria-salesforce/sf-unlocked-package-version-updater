@@ -1,7 +1,6 @@
 # sf-unlocked-package-version-updater
 
-This Github Action is a helper action to update the version number in
-`sfdx-project.json`. Forked from
+This Github Action is a helper action to update the version number in `sfdx-project.json`. Forked from
 [navikt/github-action-sfdx-version-updater](https://github.com/navikt/github-action-sfdx-version-updater/tree/master).
 
 ## Example
