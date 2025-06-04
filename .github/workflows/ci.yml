@@ -27,23 +27,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          echo "VERSION_BEFORE=$(jq -r '.packageDirectories[0].versionNumber' sfdx-project.json)" >> $GITHUB_ENV
+          echo "VERSION_BEFORE=$(jq -r '.packageDirectories[0].versionNumber' ./dist/sfdx-project.json)" >> $GITHUB_ENV
       - name: Print Output (Before)
         run: |
-          for dir in $(jq -r '.packageDirectories[].path' sfdx-project.json); do
-            version=$(jq -r --arg dir "$dir" '.packageDirectories[] | select(.path == $dir) | .versionNumber' sfdx-project.json)
+          for dir in $(jq -r '.packageDirectories[].path' ./dist/sfdx-project.json); do
+            version=$(jq -r --arg dir "$dir" '.packageDirectories[] | select(.path == $dir) | .versionNumber' ./dist/sfdx-project.json)
             echo "Package directory: $dir, Version number: $version"
           done
       - name: Test Local Action
         uses: ./
       - name: Print Output (After)
         run: |
-          for dir in $(jq -r '.packageDirectories[].path' sfdx-project.json); do
-            version=$(jq -r --arg dir "$dir" '.packageDirectories[] | select(.path == $dir) | .versionNumber' sfdx-project.json)
+          for dir in $(jq -r '.packageDirectories[].path' ./dist/sfdx-project.json); do
+            version=$(jq -r --arg dir "$dir" '.packageDirectories[] | select(.path == $dir) | .versionNumber' ./dist/sfdx-project.json)
             echo "Package directory: $dir, Version number: $version"
           done
       - run: |
-          echo "VERSION_AFTER=$(jq -r '.packageDirectories[0].versionNumber' sfdx-project.json)" >> $GITHUB_ENV
+          echo "VERSION_AFTER=$(jq -r '.packageDirectories[0].versionNumber' ./dist/sfdx-project.json)" >> $GITHUB_ENV
 
       - name: Verify Version Number
         run: |
