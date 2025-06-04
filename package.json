@@ -28,7 +28,7 @@
     "format:check": "npx prettier --check .",
     "lint": "npx eslint .",
     "local-action": "npx @github/local-action . src/main.ts .env",
-    "package": "ncc build src/index.ts --license licenses.txt --minify && rm sfdx-project.json",
+    "package": "npx rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "all": "npm run format:write && npm run lint && npm run coverage && npm run package"
   },
   "license": "MIT",
@@ -42,7 +42,6 @@
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
     "eslint": "^9.28.0",
-    "@vercel/ncc": "^0.38.3",
     "eslint-config-prettier": "^10.1.5",
     "eslint-import-resolver-typescript": "^4.4.2",
     "eslint-plugin-import": "^2.31.0",
@@ -50,6 +49,10 @@
     "make-coverage-badge": "^1.2.0",
     "prettier": "^3.5.3",
     "prettier-eslint": "^16.4.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "rollup": "^4.41.0"
   }
 }
