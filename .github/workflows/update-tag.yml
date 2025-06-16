@@ -1,8 +1,11 @@
 name: Update Tags
 on:
   push:
+    branches-ignore:
+      - '**'
     tags:
       - 'v*.*.*'
+
 jobs:
   update-tags:
     runs-on: ubuntu-latest
