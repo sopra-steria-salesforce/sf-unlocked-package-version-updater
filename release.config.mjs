@@ -36,6 +36,17 @@ export default {
         }
       }
     ],
-    '@semantic-release/github'
+    '@semantic-release/github'[
+      ('@semantic-release/exec',
+      {
+        successCmd: `
+          TAG=$(git describe --tags --abbrev=0)
+          git tag -f $(echo $TAG | cut -d. -f1)
+          git tag -f $(echo $TAG | cut -d. -f1-2)
+          git push origin $(echo $TAG | cut -d. -f1) --force
+          git push origin $(echo $TAG | cut -d. -f1-2) --force
+        `
+      })
+    ]
   ]
 }
