@@ -41,11 +41,17 @@ export default {
       ('@semantic-release/exec',
       {
         successCmd: `
-          echo "Tag is: \${nextRelease.gitTag}"
-          git tag -f \$(echo \${nextRelease.gitTag} | cut -d. -f1)
-          git tag -f \$(echo \${nextRelease.gitTag} | cut -d. -f1-2)
-          git push origin \$(echo \${nextRelease.gitTag} | cut -d. -f1) --force
-          git push origin \$(echo \${nextRelease.gitTag} | cut -d. -f1-2) --force
+          set -euxo pipefail
+          echo "Running semver alias tagging from tag: \${nextRelease.gitTag}"
+
+          major=\$(echo \${nextRelease.gitTag} | cut -d. -f1)
+          minor=\$(echo \${nextRelease.gitTag} | cut -d. -f1-2)
+
+          git tag -f "\$major"
+          git tag -f "\$minor"
+
+          git push origin "\$major" --force
+          git push origin "\$minor" --force
         `
       })
     ]
