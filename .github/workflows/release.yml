@@ -24,5 +24,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Update major/minor semver tags
-        uses: haya14busa/action-update-semver@v1
