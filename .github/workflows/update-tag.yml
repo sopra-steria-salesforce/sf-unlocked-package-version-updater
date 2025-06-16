@@ -1,0 +1,11 @@
+name: Update Tags
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+jobs:
+  update-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: haya14busa/action-update-semver@v1
