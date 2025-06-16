@@ -36,7 +36,8 @@ export default {
         }
       }
     ],
-    '@semantic-release/github'[
+    '@semantic-release/github',
+    [
       ('@semantic-release/exec',
       {
         successCmd: `
