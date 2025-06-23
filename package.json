@@ -1,6 +1,6 @@
 {
   "name": "sf-unlocked-package-version-updater",
-  "version": "2.1.3",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "author": "sopra-steria-salesforce",
