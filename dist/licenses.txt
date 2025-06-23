@@ -1,5 +1,5 @@
 Name: sf-unlocked-package-version-updater
-Version: 2.0.0
+Version: 2.2.0
 License: MIT
 Private: true
 Repository: git+https://github.com/sopra-steria-salesforce/sf-unlocked-package-version-updater.git
